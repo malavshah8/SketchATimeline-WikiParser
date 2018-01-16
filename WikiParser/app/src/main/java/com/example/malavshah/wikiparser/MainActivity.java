@@ -37,11 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         tv = (TextView) findViewById(R.id.textview);
 
-        //print("running...");
+        print("running...");
         getData();
     }
-
-
 
     public void print(String string) {
         Log.i("My App", string);
