@@ -2,8 +2,9 @@ package com.example.malavshah.wikiparser;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,17 +29,21 @@ public class MainActivity extends AppCompatActivity {
     Document document;
     TreeMap<String, String> sorted;
 
-    TextView tv;
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
+    RecyclerView.Adapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv = (TextView) findViewById(R.id.textview);
+        // tv = (TextView) findViewById(R.id.textview);
 
         print("running...");
         getData();
+
     }
 
     public void print(String string) {
@@ -111,10 +116,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         sortbykey();
-                        for (Map.Entry<String, String> entry : sorted.entrySet())
-                               // Log.i("MyApp",entry.getKey() + entry.getValue());
+                        //for (Map.Entry<String, String> entry : sorted.entrySet())
+                        // Log.i("MyApp",entry.getKey() + entry.getValue());
 
-                            tv.append(entry.getKey() + " " + entry.getValue() + "\n\n");
+                        //tv.append(entry.getKey() + " " + entry.getValue() + "\n\n");
+
+                        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                        mRecyclerView.setHasFixedSize(true);
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        mAdapter = new MainAdapter(sorted);
+                        mRecyclerView.setAdapter(mAdapter);
 
                     }
                 });
