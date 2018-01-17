@@ -4,7 +4,8 @@
     android:id="@+id/scrollview"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context="com.example.malavshah.wikiparser.MainActivity">
+    tools:context="com.example.malavshah.wikiparser.MainActivity"
+    android:background="#fff">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
